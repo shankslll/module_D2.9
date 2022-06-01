@@ -1,0 +1,43 @@
+u1 = user.objects..create_user(username='Wadim')
+Author.objects.create(authorUser=u1)
+author = Author.objects.get(id=1)
+
+u2 = User.objects.create_user('Ira')
+Author.objects.create(authorUser=u2)
+author2 = Author.objects.get(id=2)
+
+Category.objects.create(name='IT')
+Category.objects.create(name='Songs')
+Category.objects.create(name='Muvie')
+Categore.objects.create(name='education')
+
+Post.objects.create(author=author, categoryType='NW', title='sometitle', text='somebigtext')
+Post.objects.create(author=author, categoryType='AR', title='NEWarticle', text='blabla')
+Post.objects.create(author=author2, categoryType='AR', title='NEWarticle2', text='blabla2')
+
+
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser, text='anytextbyauthor')
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=2).authorUser, text='blabla')
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=1).authorUser, text='this shit')
+Comment.objects.create(commentPost=Post.objects.get(id=4), commentUser=Author.objects.get(id=1).authorUser, text='r')
+Comment.objects.create(commentPost=Post.objects.get(id=3525), commentUser=Author.objects.get(id=1).authorUser, text='anytextbyauthor')    # проверка на правильность присваивания
+
+
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=2).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=4).dislike()
+
+a = Author.objects.get(id=1)
+b =Author.objects.get(id=2)
+a.update_rating()
+b.update_rating()
+a.ratingAuthor
+b.ratingAuthor
+
+c = Author.objects.order_by('-ratingAuthor')[:1]
